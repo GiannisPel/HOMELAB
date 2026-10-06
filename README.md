@@ -37,8 +37,6 @@ The switch is being documented in **standalone mode**, using its own web interfa
 
 ## Network and addressing
 
-The infrastructure address plan below was specified by the user on **6 October 2026** and is the baseline for future configuration instructions. Address allocation does not imply that every service is already deployed.
-
 | Network or device | Address | Status / purpose |
 |---|---|---|
 | ISP network | `192.168.1.0/24` | Upstream network |
