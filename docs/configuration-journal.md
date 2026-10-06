@@ -315,11 +315,11 @@ References: [OpenWrt DHCP/DNS configuration](https://openwrt.org/docs/guide-user
 nslookup -type=A -timeout=3 -retry=3 example.net. 192.168.2.1
 ```
 
-![Desktop lookup through Cudy returns the AdGuard blocking address](../assets/screenshots/13-01-adguard-running-lookup.png)
+![Desktop lookup through Cudy returns the AdGuard blocking address](../assets/screenshots/adguard-running-lookup.png)
 
 The queried DNS server is `OpenWrt.lan`, address `192.168.2.1`. The answer for `example.net` is `0.0.0.0`.
 
-![Router logs confirm forwarding to AdGuard and a subsequent cached reply](../assets/screenshots/13-02-adguard-running-router-log.png)
+![Router logs confirm forwarding to AdGuard and a subsequent cached reply](../assets/screenshots/adguard-running-router-log.png)
 
 The relevant request at 19:31:15 follows this sequence:
 
@@ -349,9 +349,9 @@ logread -e dnsmasq | grep 'example.net' | tail -n 15
 
 **Observed on 6 October 2026 around 19:35 Europe/Athens:** The user reported CT 100 stopped. The first request was forwarded to `.5` at 19:35:44. At 19:35:47 the router received a repeated query and forwarded it to `1.1.1.1`. Public answers `104.20.21.8` and `172.66.175.59` followed in the same second. Windows displayed one three-second timeout before the successful answer.
 
-![Router logs show the first AdGuard attempt and fallback on retry](../assets/screenshots/13-03-adguard-stopped-router-log.png)
+![Router logs show the first AdGuard attempt and fallback on retry](../assets/screenshots/adguard-stopped-router-log.png)
 
-![Desktop lookup succeeds with public addresses after one timeout](../assets/screenshots/13-04-adguard-stopped-lookup.png)
+![Desktop lookup succeeds with public addresses after one timeout](../assets/screenshots/adguard-stopped-lookup.png)
 
 | Time | Observed event |
 |---|---|
@@ -369,7 +369,7 @@ References: [dnsmasq retry behavior](https://dnsmasq.org/docs/dnsmasq-man.html),
 
 **Observed on 6 October 2026 at 19:40:55 Europe/Athens:** The user reported CT 100 started again. After restarting dnsmasq to clear Cudy's cache, a desktop query from `192.168.2.199` was forwarded to `.5` and received the blocking answer `0.0.0.0`. The desktop lookup displayed that answer with no timeout message.
 
-![Router logs confirm restored forwarding to AdGuard and blocking](../assets/screenshots/13-05-adguard-restored-router-log.png)
+![Router logs confirm restored forwarding to AdGuard and blocking](../assets/screenshots/adguard-restored-router-log.png)
 
 ```text
 19:40:55 query[A] example.net from 192.168.2.199
@@ -377,7 +377,7 @@ References: [dnsmasq retry behavior](https://dnsmasq.org/docs/dnsmasq-man.html),
 19:40:55 reply example.net is 0.0.0.0
 ```
 
-![Desktop lookup returns the blocking address after AdGuard restarts](../assets/screenshots/13-06-adguard-restored-lookup.png)
+![Desktop lookup returns the blocking address after AdGuard restarts](../assets/screenshots/adguard-restored-lookup.png)
 
 | Scenario | Recorded result |
 |---|---|
