@@ -2,7 +2,7 @@
 
 This journal is a draft awaiting the new progress photographs. Steps described as planned or awaiting evidence must not be presented as completed until their results have been recorded.
 
-## 01 — Hardware identification
+## 01 - Hardware identification
 
 **Goal:** Record the exact devices used in the build.
 
@@ -10,7 +10,7 @@ The router was identified as **Cudy WR3000 v1**, with an **EU1.0** label. The co
 
 **Evidence to add:** device model labels, switch hardware revision, HP specifications, and the physical build. Record model and hardware revision as text alongside photographs.
 
-## 02 — OpenWrt installation
+## 02 - OpenWrt installation
 
 **Recorded outcome:** LuCI became accessible after installation, and the status page showed **OpenWrt 25.12.5** on **Cudy WR3000 v1**.
 
@@ -20,7 +20,7 @@ During the firmware transition, a browser tab continued showing a flashing/reboo
 
 This chapter records the installation result; it is not yet a complete flashing tutorial.
 
-## 03 — LAN addressing and administration
+## 03 - LAN addressing and administration
 
 **Goal:** Keep the homelab LAN separate from the upstream ISP network.
 
@@ -36,7 +36,7 @@ LuCI was accessed at the new address. One address-change attempt caused LuCI's c
 
 **Evidence to add:** LAN configuration, DHCP pool, and an administration session at `192.168.2.1`.
 
-## 04 — Wireless ISP uplink
+## 04 - Wireless ISP uplink
 
 **Recorded outcome:** The Cudy connected to the ISP router over **5 GHz Wi-Fi**.
 
@@ -53,7 +53,7 @@ A separate **2.4 GHz access point** was configured for the homelab LAN, with its
 
 **Evidence to add:** wireless scan results, client association, `wwan` address, the LAN access point and a connectivity result. Password fields should remain obscured in any published image.
 
-## 05 — Router SSH and software inspection
+## 05 - Router SSH and software inspection
 
 Router SSH access uses:
 
@@ -80,7 +80,7 @@ The router's storage page showed approximately **5.6 MiB of free writable flash*
 
 **Evidence to add:** memory/storage status and the package simulation output. Never include private keys, authentication keys or passwords in terminal screenshots.
 
-## 06 — Switch management address
+## 06 - Switch management address
 
 **Selected configuration:** Give the switch a manual management address within the infrastructure allocation.
 
@@ -98,7 +98,7 @@ Disabling DHCP here refers to the **switch's DHCP client**. The Cudy's DHCP serv
 
 **Evidence to add:** the completed IP settings, a successful login at the new address, and confirmation that the address survives a switch restart. These checks have not yet been recorded in this draft.
 
-## 07 — Desktop Ethernet connection
+## 07 - Desktop Ethernet connection
 
 **Connection plan:** Cudy LAN → switch port 1 using 0.5 m Cat6; switch port 5 → desktop using the long Cat6 cable.
 
@@ -122,7 +122,7 @@ nslookup example.com
 
 The ISP uplink remains wireless even after the desktop and switch are wired.
 
-## 08 — Server nodes
+## 08 - Server nodes
 
 **HP compute node:** Purchased with Ryzen 5 PRO 2400G, 8 GB RAM and 256 GB NVMe. Record the installed OS, disk layout, network address and services when configured.
 
@@ -144,7 +144,7 @@ The host previously had the reported address `192.168.1.50` and gateway `192.168
 
 **Evidence to add:** specifications, installation screens and final storage/RAM configuration. DNS resolution and the three DNS-path tests are recorded in chapter 13; VPN access remains unvalidated. Jellyfin and file syncing remain planned options.
 
-## 09 — AdGuard Home container creation
+## 09 - AdGuard Home container creation
 
 **Recorded status:** Five screenshots show the Proxmox LXC creation wizard for an intended AdGuard Home container. They do not show the final task result, a running container, or an installed AdGuard Home service. Template and CPU selections are not visible.
 
@@ -188,7 +188,7 @@ Network: vmbr0, static 192.168.2.5/24, gateway 192.168.2.1, no VLAN tag.
 
 DNS: host settings inherited in the wizard.
 
-## 10 — AdGuard Home direct DNS validation
+## 10 - AdGuard Home direct DNS validation
 
 **Recorded outcome:** On 6 October 2026, the AdGuard setup page showed its DNS listener at `192.168.2.5`. The desktop then successfully queried that address for both `google.com` and `example.com`.
 
@@ -216,7 +216,7 @@ The returned IPv6 addresses are DNS records; these tests do not establish workin
 
 **Next configuration:** Keep LAN clients using Cudy DNS at `192.168.2.1`. Prefer AdGuard at `192.168.2.5` upstream, with an independent external fallback. Inspect the current OpenWrt dnsmasq configuration and validate upstream ordering before applying changes. Test forwarding with AdGuard running, stopped and restarted. Tailscale deployment at `192.168.2.6` follows separately.
 
-## 11 — DNS forwarding prerequisites and reasoning
+## 11 - DNS forwarding prerequisites and reasoning
 
 **Observed on 6 October 2026:** The router's current configuration, dnsmasq build information, direct public-DNS lookup and AdGuard upstream were inspected before changing the lab's DNS path. These checks establish prerequisites; they do not demonstrate configured or tested failover.
 
@@ -247,7 +247,7 @@ Dnsmasq's default upstream selection does not guarantee that AdGuard is preferre
 
 References: [dnsmasq manual](https://dnsmasq.org/docs/dnsmasq-man.html), [AdGuard Home configuration](https://adguard-dns.io/kb/adguard-home/configuration/).
 
-## 12 — Queries received from the Cudy and command explanations
+## 12 - Queries received from the Cudy and command explanations
 
 **Observed on 6 October 2026, around 19:15 Europe/Athens:** AdGuard's query log shows recent requests for Google, Discord and Spotify domains. Every displayed client is `192.168.2.1`, the Cudy. The times shown in the screenshot match the user's reported local time.
 
@@ -305,9 +305,9 @@ Devices connected directly to ISP Wi-Fi are on the upstream ISP network and are 
 
 References: [OpenWrt DHCP/DNS configuration](https://openwrt.org/docs/guide-user/base-system/dhcp), [dnsmasq manual](https://dnsmasq.org/docs/dnsmasq-man.html), [RFC 9460: HTTPS DNS records](https://www.rfc-editor.org/rfc/rfc9460.html), [Firefox DNS over HTTPS](https://support.mozilla.org/en-US/kb/firefox-dns-over-https).
 
-## 13 — DNS forwarding and failover validation
+## 13 - DNS forwarding and failover validation
 
-### A: AdGuard running — passed
+### A: AdGuard running - passed
 
 **Observed on 6 October 2026 around 19:31 Europe/Athens:** A desktop query through Cudy returned the blocking address `0.0.0.0` for `example.net`. The router log records the same query from `192.168.2.199`, forwarding to AdGuard at `192.168.2.5`, and the reply `0.0.0.0`. This validates router forwarding and the expected blocking response for the temporary `||example.net^` rule. The AdGuard query-log view of the matched rule was not supplied in this step.
 
@@ -331,7 +331,7 @@ reply example.net is 0.0.0.0
 
 At 19:31:19 a repeated lookup is answered from Cudy's cache as `0.0.0.0`. Clear that cache before testing AdGuard shutdown; otherwise a cached blocked answer could conceal the fallback behavior.
 
-### B: AdGuard container stopped — passed with a client retry
+### B: AdGuard container stopped - passed with a client retry
 
 In Proxmox, shut down only CT 100 and wait until its status is stopped. Keep Cudy and the Vaio host running. Restart dnsmasq on Cudy to clear the cached blocking response, repeat the desktop lookup, and inspect the matching router logs:
 
@@ -365,7 +365,7 @@ The `udhcpc: no lease, failing` line also appears during dnsmasq restart. OpenWr
 
 References: [dnsmasq retry behavior](https://dnsmasq.org/docs/dnsmasq-man.html), [OpenWrt dnsmasq startup script and DHCP probe](https://git.openwrt.org/openwrt/staging/hauke/tree/?path=package/network/services/dnsmasq/files/dnsmasq.init).
 
-### C: AdGuard restarted — passed after cache clearing
+### C: AdGuard restarted - passed after cache clearing
 
 **Observed on 6 October 2026 at 19:40:55 Europe/Athens:** The user reported CT 100 started again. After restarting dnsmasq to clear Cudy's cache, a desktop query from `192.168.2.199` was forwarded to `.5` and received the blocking answer `0.0.0.0`. The desktop lookup displayed that answer with no timeout message.
 
@@ -387,7 +387,7 @@ References: [dnsmasq retry behavior](https://dnsmasq.org/docs/dnsmasq-man.html),
 
 These tests validate the selected DNS paths for the tested desktop A-record lookup. Each scenario was run after a dnsmasq restart to clear router caches; recovery during an uninterrupted running dnsmasq instance and its existing caches was not separately tested. Cached public answers may persist until their TTL expires after AdGuard returns. No guarantee of instant failover or identical application retry behavior is implied.
 
-### Test cleanup — instructions supplied, completion not yet recorded
+### Test cleanup - instructions supplied, completion not yet recorded
 
 1. In AdGuard's custom filtering rules, remove only the temporary `||example.net^` rule and apply the change.
 2. On Cudy, disable diagnostic logging and restart dnsmasq to clear the cached blocking answer:
