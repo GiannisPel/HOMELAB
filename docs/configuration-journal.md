@@ -255,7 +255,7 @@ References: [dnsmasq manual](https://dnsmasq.org/docs/dnsmasq-man.html), [AdGuar
 
 **Observed on 6 October 2026, around 19:15 Europe/Athens:** AdGuard's query log shows recent requests for Google, Discord and Spotify domains. Every displayed client is `192.168.2.1`, the Cudy. The times shown in the screenshot match the user's reported local time.
 
-![AdGuard query log around 19:15 showing the Cudy as client](../assets/screenshots/12-01-router-adguard-query-log.png)
+![AdGuard query log around 19:15 showing the Cudy as client](../assets/screenshots/router-adguard-query-log.png)
 
 This establishes that AdGuard receives and processes DNS queries from the router. It is consistent with the selected forwarding design, but the screenshot alone does not distinguish requests made by the router itself from requests forwarded for LAN clients. It does not prove that every device uses this path, that the exact ordered-forwarding commands were applied, that an ad domain was blocked, or that fallback works with AdGuard stopped.
 
