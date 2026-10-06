@@ -227,15 +227,15 @@ The returned IPv6 addresses are DNS records; these tests do not establish workin
 | `nslookup example.com 1.1.1.1` on the Cudy | Test whether the router can contact an independent external resolver, rather than relying only on a configured address. | Successful IPv4 and IPv6 DNS answers. Cloudflare DNS is reachable from the router at the time of this test. Returned AAAA records do not establish IPv6 connectivity. |
 | AdGuard upstream settings | Identify where AdGuard sends queries and avoid creating a circular dependency. | The displayed upstream is `https://dns10.quad9.net/dns-query`, a direct DNS-over-HTTPS endpoint. It does not point general queries back to the Cudy. Bootstrap and private reverse-DNS settings are not shown. |
 
-![AdGuard Home upstream DNS-over-HTTPS endpoint](../assets/screenshots/11-01-adguard-upstream.png)
+![AdGuard Home upstream DNS-over-HTTPS endpoint](../assets/screenshots/adguard-upstream.png)
 
 AdGuard upstream: the displayed public upstream is Quad9 over HTTPS.
 
-![OpenWrt DHCP configuration, dnsmasq version and direct public DNS test](../assets/screenshots/11-02-router-dns-preflight.png)
+![OpenWrt DHCP configuration, dnsmasq version and direct public DNS test](../assets/screenshots/router-dns-preflight.png)
 
 Router inspection: existing DHCP settings, dnsmasq 2.93 compile options and the direct lookup against `1.1.1.1`.
 
-![Completed successful direct public DNS lookup on the Cudy](../assets/screenshots/11-03-public-dns-test.png)
+![Completed successful direct public DNS lookup on the Cudy](../assets/screenshots/public-dns-test.png)
 
 The completed lookup returned A and AAAA records without a timeout.
 
