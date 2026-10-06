@@ -116,7 +116,7 @@ nslookup example.com
 ```
 
 | Check | Expected result |
-|---|---|---|
+|---|---|
 | Ethernet IPv4 | An address in `192.168.2.0/24` |
 | Subnet mask | `255.255.255.0` | 
 | Default gateway | `192.168.2.1` |
