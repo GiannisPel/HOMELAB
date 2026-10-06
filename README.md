@@ -4,8 +4,6 @@ A small homelab in Greece for learning network engineering through OpenWrt, Ethe
 
 ## Documentation status
 
-This is a starter draft based on the configuration discussed on **6 October 2026**. New hardware and configuration photographs still need to be added. The status below distinguishes confirmed observations from settings that were selected but have not yet been demonstrated in the documentation.
-
 | Milestone | Recorded status |
 |---|---|
 | OpenWrt installed on the Cudy WR3000 v1 | Confirmed: OpenWrt 25.12.5 and LuCI accessed |
