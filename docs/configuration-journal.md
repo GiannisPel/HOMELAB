@@ -390,36 +390,3 @@ References: [dnsmasq retry behavior](https://dnsmasq.org/docs/dnsmasq-man.html),
 | AdGuard container restarted | Passed after router cache clearing: `.5` supplied the blocking answer again, with no displayed timeout. |
 
 These tests validate the selected DNS paths for the tested desktop A-record lookup. Each scenario was run after a dnsmasq restart to clear router caches; recovery during an uninterrupted running dnsmasq instance and its existing caches was not separately tested. Cached public answers may persist until their TTL expires after AdGuard returns. No guarantee of instant failover or identical application retry behavior is implied.
-
-### Test cleanup - instructions supplied, completion not yet recorded
-
-1. In AdGuard's custom filtering rules, remove only the temporary `||example.net^` rule and apply the change.
-2. On Cudy, disable diagnostic logging and restart dnsmasq to clear the cached blocking answer:
-
-```sh
-uci set 'dhcp.@dnsmasq[0].logqueries=0'
-uci commit dhcp
-/etc/init.d/dnsmasq restart
-```
-
-3. From the desktop, confirm the test domain resolves to public addresses again with AdGuard still running:
-
-```powershell
-nslookup -type=A example.net. 192.168.2.1
-```
-
-Whole-Vaio shutdown and a live AdGuard instance with an unavailable Quad9 upstream have not been tested. Per-device default-DNS coverage has not been established for every wired/wireless device. Tailscale remains planned at `192.168.2.6`.
-
-## Screenshot captions
-
-Use a caption that identifies the device, action and observable result. For example:
-
-> Switch management addressing: the IP settings page shows `192.168.2.2/24`, DHCP disabled and gateway `192.168.2.1`.
-
-Once the relevant image has been added, embed it with a relative path:
-
-```markdown
-![Switch management IP settings](../assets/screenshots/06-switch-static-ip.png)
-```
-
-The AdGuard creation-wizard screenshots are embedded in chapter 09; setup and direct DNS tests are embedded in chapter 10; DNS prerequisite checks are embedded in chapter 11; router-client query logs are embedded in chapter 12; the running, stopped and restarted AdGuard tests are embedded in chapter 13. Earlier hardware chapters still await their selected photographs.
