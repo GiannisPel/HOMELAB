@@ -111,14 +111,14 @@ ping 192.168.2.2
 nslookup example.com
 ```
 
-| Check | Expected result | Recorded result |
+| Check | Expected result |
 |---|---|---|
-| Ethernet IPv4 | An address in `192.168.2.0/24` | Awaiting evidence |
-| Subnet mask | `255.255.255.0` | Awaiting evidence |
-| Default gateway | `192.168.2.1` | Awaiting evidence |
-| Router administration | LuCI opens at `192.168.2.1` | Awaiting Ethernet test |
-| Switch administration | Web interface opens at `192.168.2.2` | Awaiting evidence |
-| Internet and DNS | A website loads with desktop Wi-Fi off | Awaiting evidence |
+| Ethernet IPv4 | An address in `192.168.2.0/24` |
+| Subnet mask | `255.255.255.0` | 
+| Default gateway | `192.168.2.1` |
+| Router administration | LuCI opens at `192.168.2.1` | 
+| Switch administration | Web interface opens at `192.168.2.2` | 
+| Internet and DNS | A website loads with desktop Wi-Fi off |
 
 The ISP uplink remains wireless even after the desktop and switch are wired.
 
@@ -168,23 +168,23 @@ The container DNS field controls name resolution for the container's own OS. It 
 
 The user confirmed the final address plan on 6 October 2026: router `.1`, switch `.2`, Vaio `.3`, future mini PC server `.4`, AdGuard Home `.5`, and Tailscale `.6`, all within `192.168.2.0/24`. The captured AdGuard address matches this plan and should remain `192.168.2.5/24`. AdGuard initial setup uses `http://192.168.2.5:3000`; after selecting web port 80, administration uses `http://192.168.2.5`. Chapter 10 records the later successful DNS tests.
 
-![AdGuard container wizard: General: CT 100, hostname AdGuard, unprivileged and nesting selected.](../assets/screenshots/09-01-adguard-general.png)
+![AdGuard container wizard: General: CT 100, hostname AdGuard, unprivileged and nesting selected.](../assets/screenshots/adguard-general.png)
 
 General: CT 100, hostname AdGuard, unprivileged and nesting selected.
 
-![AdGuard container wizard: Disk: 5 GiB on local-lvm.](../assets/screenshots/09-02-adguard-disk.png)
+![AdGuard container wizard: Disk: 5 GiB on local-lvm.](../assets/screenshots/adguard-disk.png)
 
 Disk: 5 GiB on local-lvm.
 
-![AdGuard container wizard: Memory: 1000 MiB RAM and 512 MiB swap limit.](../assets/screenshots/09-03-adguard-memory.png)
+![AdGuard container wizard: Memory: 1000 MiB RAM and 512 MiB swap limit.](../assets/screenshots/adguard-memory.png)
 
 Memory: 1000 MiB RAM and 512 MiB swap limit.
 
-![AdGuard container wizard: Network: vmbr0, static 192.168.2.5/24, gateway 192.168.2.1, no VLAN tag.](../assets/screenshots/09-04-adguard-network.png)
+![AdGuard container wizard: Network: vmbr0, static 192.168.2.5/24, gateway 192.168.2.1, no VLAN tag.](../assets/screenshots/adguard-network.png)
 
 Network: vmbr0, static 192.168.2.5/24, gateway 192.168.2.1, no VLAN tag.
 
-![AdGuard container wizard: DNS: host settings inherited in the wizard.](../assets/screenshots/09-05-adguard-dns.png)
+![AdGuard container wizard: DNS: host settings inherited in the wizard.](../assets/screenshots/adguard-dns.png)
 
 DNS: host settings inherited in the wizard.
 
@@ -192,7 +192,7 @@ DNS: host settings inherited in the wizard.
 
 **Recorded outcome:** On 6 October 2026, the AdGuard setup page showed its DNS listener at `192.168.2.5`. The desktop then successfully queried that address for both `google.com` and `example.com`.
 
-![AdGuard setup instructions showing the DNS listener at 192.168.2.5](../assets/screenshots/10-01-adguard-configure-devices.png)
+![AdGuard setup instructions showing the DNS listener at 192.168.2.5](../assets/screenshots/adguard-configure-devices.png)
 
 The Router tab contains manual device-configuration instructions. Viewing that tab does not apply settings to OpenWrt.
 
@@ -201,7 +201,7 @@ nslookup google.com 192.168.2.5
 nslookup example.com 192.168.2.5
 ```
 
-![Successful direct DNS lookups through AdGuard Home](../assets/screenshots/10-02-adguard-dns-tests.png)
+![Successful direct DNS lookups through AdGuard Home](../assets/screenshots/adguard-dns-tests.png)
 
 | Observation | Recorded result |
 |---|---|
