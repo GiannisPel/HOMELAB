@@ -1,7 +1,5 @@
 # Configuration screenshots
 
-Place the selected progress photographs in this directory. AdGuard creation, direct DNS tests and DNS prerequisite screenshots are embedded in the journal.
-
 ## Suggested filenames
 
 | Stage | Example filename |
