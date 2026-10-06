@@ -20,6 +20,8 @@ During the firmware transition, a browser tab continued showing a flashing/reboo
 
 This chapter records the installation result; it is not yet a complete flashing tutorial.
 
+![Cudy Router with LuCI interface in the background](../assets/screenshots/cudy_router.jpg)
+
 ## 03 - LAN addressing and administration
 
 **Goal:** Keep the homelab LAN separate from the upstream ISP network.
@@ -35,6 +37,8 @@ This chapter records the installation result; it is not yet a complete flashing 
 LuCI was accessed at the new address. One address-change attempt caused LuCI's connectivity check to roll back the pending configuration; document the final successful method using the corresponding photograph.
 
 **Evidence to add:** LAN configuration, DHCP pool, and an administration session at `192.168.2.1`.
+
+![Cudy Router & switch plugged in](../assets/screenshots/cudy_and_switch.jpg)
 
 ## 04 - Wireless ISP uplink
 
