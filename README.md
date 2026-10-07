@@ -30,7 +30,7 @@ A small homelab in Greece for learning network engineering through OpenWrt, Ethe
 | Homelab router | Cudy WR3000 v1 / EU1.0, OpenWrt 25.12.5 | Routing, DHCP, DNS, firewall and Wi-Fi |
 | Switch | TP-Link ES205G, 5 Gigabit RJ45 ports | Ethernet connectivity; future VLAN experiments |
 | Compute node | HP EliteDesk 705 G4 DM; Ryzen 5 PRO 2400G, 8 GB RAM, 256 GB NVMe | Purchased; intended for compute and media services |
-| Secondary node | Old Sony Vaio laptop, approximately 2009; Proxmox VE | Management at `192.168.2.3/24`; AdGuard DNS responds at `.5`; Tailscale at `.6` remains planned |
+| Secondary node | Old Sony Vaio laptop, approximately 2009; Proxmox VE | Management at `192.168.2.3/24`; AdGuard DNS responds at `.5`; Tailscale at `.6` |
 | Workstation | Desktop PC | Administration and network experiments |
 
 The switch is being documented in **standalone mode**, using its own web interface. An Omada Controller is an optional separate management system. The Cudy continues to be managed through OpenWrt.
@@ -48,7 +48,7 @@ The switch is being documented in **standalone mode**, using its own web interfa
 | Vaio Proxmox management | `192.168.2.3/24` | Confirmed: web interface reached at `https://192.168.2.3:8006` |
 | Future mini PC server | `192.168.2.4` | Reserved for the compute/server host |
 | AdGuard Home container | `192.168.2.5` | Forwarding/filtering, stopped-container fallback and restoration after cache clearing validated |
-| Tailscale container | `192.168.2.6` | Assigned service address; deployment planned |
+| Tailscale container | `192.168.2.6` | Assigned service address |
 | Infrastructure allocation | `192.168.2.2`–`192.168.2.20` | Reserved for manually assigned addresses |
 | Dynamic DHCP pool | `192.168.2.21`–`192.168.2.254` | LAN clients; start 21, limit 234 |
 
