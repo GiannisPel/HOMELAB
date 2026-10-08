@@ -1,0 +1,26 @@
+# Private inputs and exports
+private/
+raw/
+originals/
+backups/
+*.zip
+*.tar
+*.tar.gz
+*.bak
+*.pcap
+*.pcapng
+
+# Images need deliberate publication review
+assets/screenshots/*
+!assets/screenshots/README.md
+
+# Credentials and local settings
+.env
+.env.*
+!*.example
+*.key
+*.pem
+id_rsa*
+id_ed25519*
+tailscaled.state
+credentials.*
