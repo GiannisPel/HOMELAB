@@ -243,7 +243,7 @@ Router inspection: existing DHCP settings, dnsmasq 2.93 compile options and the 
 
 The completed lookup returned A and AAAA records without a timeout.
 
-**Selected next design, not yet applied:** LAN clients query Cudy at `192.168.2.1`. Cudy prefers AdGuard at `192.168.2.5`, and uses an independent public resolver if AdGuard is unavailable. AdGuard resolves allowed queries through Quad9. General upstream queries must not follow the loop Cudy → AdGuard → Cudy.
+LAN clients query Cudy at `192.168.2.1`. Cudy prefers AdGuard at `192.168.2.5`, and uses an independent public resolver if AdGuard is unavailable. AdGuard resolves allowed queries through Quad9. General upstream queries must not follow the loop Cudy → AdGuard → Cudy.
 
 Dnsmasq's default upstream selection does not guarantee that AdGuard is preferred. Its documented `strict-order` setting tries servers in resolver-file order. An ordered resolver file avoids assuming that a GUI or command-line server list preserves that order. Default retry behavior relies on client retries, so failover timing requires a live test; instantaneous recovery has not been established.
 
