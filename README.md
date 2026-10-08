@@ -20,11 +20,11 @@ Original screenshots are excluded. Their useful results are preserved in [saniti
 | AdGuard filtering | Direct resolution and blocking through the router demonstrated |
 | DNS fallback | Worked with AdGuard stopped after one three-second client timeout |
 | DNS recovery | Blocking returned after restarting AdGuard and clearing router cache |
-| Tailscale | User reported successful connection; restart/mobile-data tests not separately recorded |
+| Tailscale | Successful connection; restart/mobile-data tests not separately recorded |
 | PDM 1.1.7 | Both independent hosts online in one dashboard |
 | Port scan | LAN reachability recorded; public internet exposure unverified |
 | Nginx Proxy Manager, media stack, password manager | Planned; no installation demonstrated |
-| VLANs, isolated guest Wi-Fi, HA cluster | Not deployed in the recorded setup |
+| VLANs, isolated guest Wi-Fi, HA cluster | Not deployed YET |
 
 ## Hardware and roles
 
