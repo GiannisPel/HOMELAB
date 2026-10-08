@@ -1,81 +1,83 @@
-# Micro Homelab: Build and Configuration Journal
+# Micro Homelab - Network Engineering Journal
 
-A small homelab in Greece for learning network engineering through OpenWrt, Ethernet switching, VLANs, packet capture and remote access.
+A small homelab for learning routing, DNS, switching, virtualization and remote administration. Updated through **8 October 2026**.
 
-## Documentation status
+**Public, anonymized edition:** Local IPs and hostnames are fictional replacements. `192.0.2.0/24` represents the lab and `198.51.100.0/24` the upstream network. These are documentation-only ranges, not deployment addresses. Substitute the real private addresses before using any example. Public resolver addresses and vendor URLs are retained.
 
-| Milestone | Recorded status |
+Original screenshots are excluded. Their useful results are preserved in [sanitized evidence](docs/sanitized-evidence.md). See [privacy notes](docs/privacy.md) for the scope of anonymization.
+
+## Current status
+
+| Component or milestone | Recorded state |
 |---|---|
-| OpenWrt installed on the Cudy WR3000 v1 | Confirmed: OpenWrt 25.12.5 and LuCI accessed |
-| Separate ISP and homelab subnets | Confirmed: ISP `192.168.1.0/24`; homelab `192.168.2.0/24` |
-| Wireless ISP uplink | Confirmed: 5 GHz client connection, `wwan`, WAN firewall zone |
-| Homelab Wi-Fi | Confirmed: separate 2.4 GHz access point on LAN |
-| Router SSH access | Used during package inspection |
-| Ethernet switch and long Cat6 cable | Acquired |
-| Switch management address | `192.168.2.2` selected; final settings and persistence need evidence |
-| Desktop Ethernet connectivity | Connection plan recorded; address and connectivity checks need evidence |
-| Vaio connection and OS | Proxmox at `192.168.2.3/24`; HTTPS administration on port 8006 accessed successfully |
-| AdGuard Home LXC | Running at `192.168.2.5`; direct DNS resolution and requests through Cudy demonstrated |
-| DNS forwarding prerequisites | Inspected: dnsmasq 2.93, DHCP/DNS settings, AdGuard Quad9 upstream and direct public-DNS reachability |
-| Router forwarding and filtering | Passed: desktop query through `.1` forwarded to `.5` and returned the expected blocking address |
-| AdGuard stopped: external fallback | Passed: `1.1.1.1` returned public addresses after one three-second client timeout |
-| AdGuard restarted: restoration | Passed after router cache clearing: `.5` returned the blocking answer again; test cleanup awaiting confirmation |
-| Server services and VLAN segmentation | Planned; not documented as deployed |
+| Cudy WR3000 v1 / EU1.0 | OpenWrt 25.12.5 installed; LuCI and SSH accessed |
+| ISP uplink | Working 5 GHz station connection through `wwan`, assigned to WAN |
+| Lab Wi-Fi | Separate 2.4 GHz LAN AP with its own SSID/password |
+| TP-Link ES205G | HTTP management reachable in LAN scan; power-cycle persistence unverified |
+| VAIO, alias `pve-core` | Proxmox host; AdGuard, Tailscale and PDM running in separate LXCs |
+| HP, alias `pve-compute` | Proxmox installed; management accessed; registered in PDM |
+| Both Proxmox hosts | PVE 9.2.21, kernel `7.0.14-22-pve` after updates |
+| AdGuard filtering | Direct resolution and blocking through the router demonstrated |
+| DNS fallback | Worked with AdGuard stopped after one three-second client timeout |
+| DNS recovery | Blocking returned after restarting AdGuard and clearing router cache |
+| Tailscale | User reported successful connection; restart/mobile-data tests not separately recorded |
+| PDM 1.1.7 | Both independent hosts online in one dashboard |
+| Port scan | LAN reachability recorded; public internet exposure unverified |
+| Nginx Proxy Manager, media stack, password manager | Planned; no installation demonstrated |
+| VLANs, isolated guest Wi-Fi, HA cluster | Not deployed in the recorded setup |
 
-## Hardware
+## Hardware and roles
 
-| Component | Hardware | Role |
+| Device | Hardware | Role |
 |---|---|---|
-| ISP gateway | Existing ISP router | Internet access; upstream Wi-Fi network |
-| Homelab router | Cudy WR3000 v1 / EU1.0, OpenWrt 25.12.5 | Routing, DHCP, DNS, firewall and Wi-Fi |
-| Switch | TP-Link ES205G, 5 Gigabit RJ45 ports | Ethernet connectivity; future VLAN experiments |
-| Compute node | HP EliteDesk 705 G4 DM; Ryzen 5 PRO 2400G, 8 GB RAM, 256 GB NVMe | Purchased; intended for compute and media services |
-| Secondary node | Old Sony Vaio laptop, approximately 2009; Proxmox VE | Management at `192.168.2.3/24`; AdGuard DNS responds at `.5`; Tailscale at `.6` |
+| ISP gateway | Existing ISP router | Upstream internet and Wi-Fi |
+| Lab router | Cudy WR3000 v1 | DHCP, DNS forwarding, routing, firewall and Wi-Fi |
+| Switch | TP-Link ES205G, five Gigabit RJ45 ports | LAN connectivity and future VLAN learning |
+| Core host | Older Sony VAIO, 4 GB installed RAM | Lightweight infrastructure guests |
+| Compute host | HP EliteDesk 705 G4 DM; Ryzen 5 PRO 2400G, 8 GB DDR4, 256 GB NVMe | Proxmox capacity for heavier workloads |
 | Workstation | Desktop PC | Administration and network experiments |
 
-The switch is being documented in **standalone mode**, using its own web interface. An Omada Controller is an optional separate management system. The Cudy continues to be managed through OpenWrt.
+The VAIO battery powers only the laptop. It does not keep the router, switch or HP running. This is not a high-availability deployment.
 
-## Network and addressing
+## Anonymized address plan
 
-| Network or device | Address | Status / purpose |
+| Role | Documentation address | State |
 |---|---|---|
-| ISP network | `192.168.1.0/24` | Upstream network |
-| ISP gateway | `192.168.1.1` | Upstream default gateway |
-| Cudy wireless WAN | DHCP address in `192.168.1.0/24` | `wwan` over 5 GHz Wi-Fi |
-| Homelab LAN | `192.168.2.0/24` | Separate routed network |
-| Cudy LAN gateway | `192.168.2.1` | DHCP and DNS server for the LAN |
-| Switch management | `192.168.2.2` | Assigned management address; persistence test not recorded |
-| Vaio Proxmox management | `192.168.2.3/24` | Confirmed: web interface reached at `https://192.168.2.3:8006` |
-| Future mini PC server | `192.168.2.4` | Reserved for the compute/server host |
-| AdGuard Home container | `192.168.2.5` | Forwarding/filtering, stopped-container fallback and restoration after cache clearing validated |
-| Tailscale container | `192.168.2.6` | Assigned service address |
-| Infrastructure allocation | `192.168.2.2`–`192.168.2.20` | Reserved for manually assigned addresses |
-| Dynamic DHCP pool | `192.168.2.21`–`192.168.2.254` | LAN clients; start 21, limit 234 |
+| Upstream network / gateway | `198.51.100.0/24` / `198.51.100.1` | Fictional equivalents |
+| Cudy wireless WAN | Upstream DHCP | Routed Wi-Fi uplink |
+| Lab network | `192.0.2.0/24` | Fictional equivalent |
+| Router | `192.0.2.1` | Client gateway and DNS |
+| Switch | `192.0.2.2` | Management |
+| VAIO / `pve-core` | `192.0.2.3` | Proxmox HTTPS port 8006 |
+| HP / `pve-compute` | `192.0.2.4` | Proxmox HTTPS port 8006 |
+| AdGuard / CT 100 | `192.0.2.5` | Preferred filtering resolver |
+| Tailscale / CT 102 | `192.0.2.6` | Subnet router |
+| Nginx Proxy Manager | `192.0.2.7` | Proposed, not deployed |
+| PDM / CT 200 | `192.0.2.10` | HTTPS port 8443 |
+| Infrastructure allocation | `.2`–`.20` | Manual addresses |
+| DHCP pool | `.21`–`.254` | Start 21, limit 234 |
 
-The switch management IP is used to reach its administration page. LAN clients use **the Cudy at `192.168.2.1` as their default gateway**.
+Clients use Cudy as gateway and DNS. Cudy forwards DNS to AdGuard first and an independent public resolver on fallback. The switch management IP is not the client gateway.
 
-## Physical connection plan
+## Physical connection allocation
 
-| Connection | Cable or medium | Ports |
+| Connection | Medium | Allocation |
 |---|---|---|
-| ISP gateway ↔ Cudy | 5 GHz Wi-Fi | Cudy in client/station mode |
-| Cudy ↔ switch | 0.5 m Cat6 | Cudy LAN port → switch port 1 |
-| Switch ↔ desktop | Long Cat6 | Switch port 5 → desktop Ethernet port |
-| Switch ↔ HP compute node | Planned 0.25 m Cat6 | Switch port 2 |
-| Switch ↔ Vaio | Connected; cable length not yet documented | Port 3 is the planned allocation; actual port needs confirmation |
-| Future expansion | Unassigned | Switch port 4 |
+| ISP → Cudy | 5 GHz Wi-Fi | No switch port |
+| Cudy LAN → switch | 0.5 m Cat6 | Port 1 |
+| HP → switch | Short Cat6; 0.25 m proposed | Port 2 planned |
+| VAIO → switch | Ethernet, length unrecorded | Port 3 planned |
+| Expansion | Unassigned | Port 4 spare |
+| Desktop → switch | Long Cat6; 5 m originally proposed | Port 5 planned |
 
-Router-to-switch and desktop connections initially use the default LAN. A tagged VLAN trunk is a future configuration step, not a completed configuration in this draft.
+Hosts are reachable, but a complete final physical port inventory is not recorded. The router uplink currently carries the ordinary LAN, not a deployed VLAN trunk.
 
-## Configuration journal
+## Documentation
 
-The [configuration journal](docs/configuration-journal.md) covers installation, addressing, the wireless uplink, switch configuration and validation. Each chapter has a place for the corresponding photographs and observations.
+- [Architecture and availability](docs/architecture.md)
+- [Configuration journal, chapters 01–18](docs/configuration-journal.md)
+- [Sanitized observations and tests](docs/sanitized-evidence.md)
+- [Privacy notes](docs/privacy.md)
+- [Screenshot handling](assets/screenshots/README.md)
 
-The [screenshot guide](assets/screenshots/README.md) gives filenames and caption conventions for adding evidence to the repository.
-
-## References
-
-- [OpenWrt: Cudy WR3000 v1 hardware information](https://openwrt.org/toh/hwdata/cudy/cudy_wr3000_v1)
-- [OpenWrt: routed wireless client](https://openwrt.org/docs/guide-user/network/wifi/connect_client_wifi)
-- [TP-Link: ES205G v1 documentation](https://support.omadanetworks.com/en/product/es205g/v1/)
-- [Microsoft: ipconfig](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig)
+References: [OpenWrt WR3000 v1](https://openwrt.org/toh/hwdata/cudy/cudy_wr3000_v1), [routed wireless client](https://openwrt.org/docs/guide-user/network/wifi/connect_client_wifi), [ES205G support](https://support.omadanetworks.com/en/product/es205g/v1/), [PDM documentation](https://pdm.proxmox.com/docs/), [RFC 5737](https://www.rfc-editor.org/rfc/rfc5737).
