@@ -65,7 +65,7 @@ Clients use Cudy as gateway and DNS. Cudy forwards DNS to AdGuard first and an i
 |---|---|---|
 | ISP → Cudy | 5 GHz Wi-Fi | No switch port |
 | Cudy LAN → switch | 0.5 m Cat6 | Port 1 |
-| HP → switch | Short Cat6; 0.25 m proposed | Port 2 planned |
+| HP → switch | Short Cat6; 0.25 m proposed | Port 2 |
 | VAIO → switch | Ethernet, length unrecorded | Port 3 planned |
 | Expansion | Unassigned | Port 4 spare |
 | Desktop → switch | Long Cat6; 5 m originally proposed | Port 5 planned |
