@@ -1,6 +1,6 @@
 # Sanitized Evidence
 
-## DNS — 6 October 2026
+## DNS 
 
 | Evidence | Relevant observation |
 |---|---|
@@ -22,7 +22,7 @@ reply example.net is 0.0.0.0
 
 Stopped-container test: first query went to AdGuard without an observed answer; client retry about three seconds later went to `1.1.1.1` and received public A records. The client displayed one timeout before success. Router caches were cleared between scenarios. Whole-host shutdown and uninterrupted recovery were not separately tested.
 
-## HP installer — 8 October 2026
+## HP installer
 
 | Observation | Sanitized value |
 |---|---|
@@ -61,7 +61,7 @@ Latest VAIO output also showed 829 MiB free and 1.5 GiB buff/cache. An earlier s
 
 Caps limit memory growth rather than reserving all that physical RAM. These light-activity snapshots do not establish peak requirements.
 
-## PDM dashboard — 8 October 2026
+## PDM dashboard 
 
 | Observation | Recorded result |
 |---|---|
@@ -78,7 +78,7 @@ Caps limit memory growth rather than reserving all that physical RAM. These ligh
 
 Aggregates do not imply pooled resources. Original remote IDs, accounts, addresses and unique IPv6 prefix are omitted.
 
-## LAN TCP scan — 8 October 2026
+## LAN TCP scan
 
 | Target role | Fictional address | Open TCP ports shown |
 |---|---|---|
