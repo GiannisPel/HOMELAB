@@ -371,7 +371,7 @@ References: [dnsmasq retry behavior](https://dnsmasq.org/docs/dnsmasq-man.html),
 
 ### C: AdGuard restarted - passed after cache clearing
 
-**Observed on 6 October 2026 at 19:40:55 Europe/Athens:** The user reported CT 100 started again. After restarting dnsmasq to clear Cudy's cache, a desktop query from `192.168.2.199` was forwarded to `.5` and received the blocking answer `0.0.0.0`. The desktop lookup displayed that answer with no timeout message.
+CT 100 started again. After restarting dnsmasq to clear Cudy's cache, a desktop query from `192.168.2.199` was forwarded to `.5` and received the blocking answer `0.0.0.0`. The desktop lookup displayed that answer with no timeout message.
 
 ![Router logs confirm restored forwarding to AdGuard and blocking](../assets/screenshots/adguard-restored-router-log.png)
 
