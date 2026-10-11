@@ -67,7 +67,7 @@ The VAIO battery powers only the laptop. PDM aggregates management; this is not 
 | NPM | `192.0.2.7` | Proposed, not deployed |
 | PDM / CT 200 | `192.0.2.10` | HTTPS 8443 |
 | Trusted | `<TRUSTED_NET>/24` | `trusted`, `br-lan.20`, gateway/DNS `<TRUSTED_GW>` |
-| Guest | `203.0.113.0/24` | `guest`, `br-guest`, gateway/DNS `203.0.113.1` |
+| Guest | `192.168.5.0/24` | `guest`, `br-guest`, gateway/DNS `192.168.5.1` |
 | Existing LAN infrastructure / DHCP | `.2`–`.20` / `.21`–`.254` | Keep the allocation for Homelab |
 | Trusted and Guest DHCP | Host numbers `.100`–`.249` | Start 100, limit 150; lease 12h proposed/recorded |
 
